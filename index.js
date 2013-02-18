@@ -15,8 +15,11 @@ function closestPair(a_cell, a_positions, b_cell, b_positions, result) {
     a_positions = b_positions;
     b_positions = tp;
   }
-  var dimension = b_positions[0].length;
   if(!result) {
+    if(b_cell.length === 0) {
+      return Number.NaN;
+    }
+    var dimension = b_positions[b_cell[0]].length;
     if(TMP_BUFFER.length < dimension) {
       TMP_BUFFER = new Float64Array(b_s)
       TMP_ARRAY[0] = TMP_ARRAY[1] = TMP_BUFFER;
@@ -25,6 +28,7 @@ function closestPair(a_cell, a_positions, b_cell, b_positions, result) {
   }
   switch(a_cell.length) {
     case 0:
+      var dimension = b_positions[b_cell[0]].length;
       for(var i=0; i<dimension; ++i) {
         result[0][i] = result[1][i] = Number.NaN;
       }
